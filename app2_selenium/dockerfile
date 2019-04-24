@@ -1,0 +1,12 @@
+FROM selenium/standalone-chrome
+
+USER root
+
+COPY . /usr/app
+
+WORKDIR /usr/app
+
+RUN apt update && apt install maven openjdk-8-jdk -y && \
+    chown -R seluser:seluser ../app && mvn clean verify -DskipTests
+
+
